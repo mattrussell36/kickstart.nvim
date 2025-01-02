@@ -160,15 +160,33 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Changing vim modes
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, desc = 'Exit normal mode' })
 vim.keymap.set('n', ';', ':', { noremap = true, desc = 'Go to command mode' })
+
+-- Buffer management
+vim.keymap.set('n', '<leader>bb', '<C-^>', { desc = 'Jump to last buffer' })
+vim.keymap.set('n', '<leader>w', ':bd<CR>', { noremap = true, desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>W', ':%bd<CR>', { noremap = true, desc = 'Close all buffers' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+--
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+
+-- Navivate grep results
+vim.keymap.set('n', ']f', ':cnext<CR>', { noremap = true, desc = '[F]ind next search result' })
+vim.keymap.set('n', '[f', ':cprev<CR>', { noremap = true, desc = '[F]ind prev search result' })
+
+-- Shift lines up and down
+vim.keymap.set('n', '<leader>j', 'ddp', { desc = 'Move line down' })
+vim.keymap.set('n', '<leader>k', 'ddkP', { desc = 'Move line up' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -406,6 +424,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>p', builtin.find_files, { desc = 'Search files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -933,7 +952,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`

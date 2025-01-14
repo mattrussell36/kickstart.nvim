@@ -11,14 +11,22 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '<leader>bf', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
-    { '<leader>b', ':Neotree toggle<CR>', desc = 'NeoTree toggle', silent = true },
+    { '<leader>t', ':Neotree toggle<CR>', desc = 'NeoTree toggle', silent = true },
+    { '<leader>T', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
     filesystem = {
+      hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
       window = {
         mappings = {
           ['\\'] = 'close_window',
+        },
+      },
+      filtered_items = {
+        hide_dotfiles = false,
+        hide_by_name = {
+          'node_modules',
+          '.git',
         },
       },
     },

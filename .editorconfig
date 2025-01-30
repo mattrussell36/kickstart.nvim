@@ -1,3 +1,3 @@
 [*.lua]
 indent_size = 2
-intent_style = spaces
+indent_style = space

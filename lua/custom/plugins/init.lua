@@ -18,4 +18,8 @@ return {
     },
     cmd = { 'CopilotChatOpen', 'CopilotChat' },
   },
+  {
+    'windwp/nvim-ts-autotag',
+    opts = {},
+  },
 }

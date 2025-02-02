@@ -13,9 +13,7 @@ return {
       { 'nvim-lua/plenary.nvim', branch = 'master' }, -- for curl, log and async functions
     },
     build = 'make tiktoken', -- Only on MacOS or Linux
-    opts = {
-      -- See Configuration section for options
-    },
+    opts = {},
     cmd = { 'CopilotChatOpen', 'CopilotChat' },
   },
   {
@@ -23,6 +21,7 @@ return {
     opts = {},
   },
   {
+    -- Sets vim.o.background to 'dark' or 'light' from os system settings
     'f-person/auto-dark-mode.nvim',
     opts = {},
   },

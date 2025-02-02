@@ -170,9 +170,9 @@ vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, desc = 'Exit normal mode' }
 vim.keymap.set('n', ';', ':', { noremap = true, desc = 'Go to command mode' })
 
 -- Buffer management
-vim.keymap.set('n', '<leader>bb', '<C-^>', { desc = 'Jump to last buffer' })
+vim.keymap.set('n', '<leader><Tab>', '<C-^>', { desc = 'Jump to last buffer' })
 vim.keymap.set('n', '<leader>w', ':bd<CR>', { noremap = true, desc = 'Close current buffer' })
-vim.keymap.set('n', '<leader>W', ':%bd<CR>', { noremap = true, desc = 'Close all buffers' })
+vim.keymap.set('n', '<leader>wa', ':%bd<CR>', { noremap = true, desc = 'Close all buffers' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -878,21 +878,33 @@ require('lazy').setup({
     end,
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+  -- { -- You can easily change to a different colorscheme.
+  --   -- Change the name of the colorscheme plugin below, and then
+  --   -- change the command in the config to whatever the name of that colorscheme is.
+  --   --
+  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   -- init = function()
+  --   --   -- Load the colorscheme here.
+  --   --   -- Like many other themes, this one has different styles, and you could load
+  --   --   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+  --   --   vim.cmd.colorscheme 'tokyonight-night'
+  --   --
+  --   --   -- You can configure highlights by doing something like:
+  --   --   vim.cmd.hi 'Comment gui=none'
+  --   -- end,
+  -- },
+
+  -- {
+  --   'sainnhe/sonokai',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  -- },
+  {
+    'catppuccin/nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 

@@ -22,4 +22,8 @@ return {
     'windwp/nvim-ts-autotag',
     opts = {},
   },
+  {
+    'f-person/auto-dark-mode.nvim',
+    opts = {},
+  },
 }

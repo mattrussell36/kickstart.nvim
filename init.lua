@@ -198,14 +198,6 @@ vim.keymap.set('n', '[f', ':cprev<CR>', { noremap = true, desc = '[F]ind prev se
 vim.keymap.set('n', '<leader>j', 'ddp', { desc = 'Move line down' })
 vim.keymap.set('n', '<leader>k', 'ddkP', { desc = 'Move line up' })
 
--- Check if neovim is running Visual Studio Code and run
--- any vscode specific configuration. Return so no plugins are
--- instantiated, instead just use vscode plugins
-if vim.g.vscode then
-  require('custom.vscode').init()
-  return
-end
-
 -- Copilot
 vim.keymap.set('n', '<leader>cp', ':CopilotChatOpen<CR>', { desc = '[C]o[Pilot]' })
 

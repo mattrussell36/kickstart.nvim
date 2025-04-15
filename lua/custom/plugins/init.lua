@@ -20,9 +20,9 @@ return {
     'windwp/nvim-ts-autotag',
     opts = {},
   },
-  {
-    -- Sets vim.o.background to 'dark' or 'light' from os system settings
-    'f-person/auto-dark-mode.nvim',
-    opts = {},
-  },
+  -- {
+  --   -- Sets vim.o.background to 'dark' or 'light' from os system settings
+  --   'f-person/auto-dark-mode.nvim',
+  --   opts = {},
+  -- },
 }

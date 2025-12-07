@@ -250,6 +250,20 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+-- Returns biome formatters for stevearc/conform if available,
+-- otherwise falls back to prettierd/prettier.
+---@param bufnr integer
+---@return table<string, boolean|integer>
+local function javascript_formatter(bufnr)
+  local conform = require 'conform'
+
+  if conform.get_formatter_info('biome', bufnr).available then
+    return { 'biome', 'biome-check', 'biome-organize-imports' }
+  end
+
+  return { 'prettierd', 'prettier', stop_after_first = true }
+end
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -419,11 +433,12 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            n = { ['d'] = require('telescope.actions').delete_buffer },
+            i = { ['<C-d>'] = require('telescope.actions').delete_buffer },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -448,7 +463,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader><leader>', function()
+        builtin.buffers { sort_lastused = true }
+      end, { desc = '[ ] Find existing buffers' })
 
       -- Git keymaps
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search[G]it [B]ranches' })
@@ -762,10 +779,12 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { 'prettierd', 'prettier', stop_after_first = true },
-        javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
-        typescript = { 'prettierd', 'prettier', stop_after_first = true },
-        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        -- javascript = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+
+        javascript = javascript_formatter,
+        javascriptreact = javascript_formatter,
+        typescript = javascript_formatter,
+        typescriptreact = javascript_formatter,
       },
     },
   },
